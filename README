@@ -1,39 +1,39 @@
-Nama : Muhamad Dika Ramadhan
-Nim : 20240801045
-Mata Kuliah : Pemegroman Web CR 002
+👤 Nama : Muhamad Dika Ramadhan
+🆔 Nim : 20240801045
+📘 Mata Kuliah : Pemegroman Web CR 002
 
 
 
-# Portfolio Personal Dinamis
+# 💼 Portfolio Personal Dinamis
 
 Portfolio personal berbasis Laravel untuk menampilkan profil, daftar project, detail laporan project, form kontak, panel admin, dan halaman khusus Laporan UTS dalam bentuk PDF.
 
 Project ini dibuat sebagai website portfolio yang tidak hanya statis, tetapi juga punya data project dari database dan panel admin untuk mengelola konten.
 
-## Fitur Utama
+## ✨ Fitur Utama
 
-- Halaman utama portfolio dengan profil singkat, stack teknologi, daftar project, dan form kontak.
-- Halaman detail project terpisah untuk menampilkan laporan awal project, analisis masalah, kebutuhan sistem, arsitektur, implementasi, dan flow perancangan.
-- Halaman khusus Laporan UTS di `/laporan-uts`.
-- Preview PDF Laporan UTS langsung di halaman web.
-- Endpoint PDF Laporan UTS di `/laporan-uts/pdf`.
-- Form kontak yang menyimpan pesan ke database.
-- Panel admin Filament untuk mengelola project dan pesan kontak.
-- Seeder awal untuk role, user admin, dan data project.
-- Docker environment dengan PHP, Nginx, dan MariaDB.
+- 🏠 Halaman utama portfolio dengan profil singkat, stack teknologi, daftar project, dan form kontak.
+- 📄 Halaman detail project terpisah untuk menampilkan laporan awal project, analisis masalah, kebutuhan sistem, arsitektur, implementasi, dan flow perancangan.
+- 📝 Halaman khusus Laporan UTS di `/laporan-uts`.
+- 👀 Preview PDF Laporan UTS langsung di halaman web.
+- 🔗 Endpoint PDF Laporan UTS di `/laporan-uts/pdf`.
+- 💬 Form kontak yang menyimpan pesan ke database.
+- 🛠️ Panel admin Filament untuk mengelola project dan pesan kontak.
+- 🌱 Seeder awal untuk role, user admin, dan data project.
+- 🐳 Docker environment dengan PHP, Nginx, dan MariaDB.
 
-## Teknologi
+## 🧰 Teknologi
 
-- Laravel 12
-- PHP 8.2+
-- Filament 3
-- MariaDB 10.11
-- Blade
-- Vite
-- Tailwind CSS
-- Docker dan Docker Compose
+- 🚀 Laravel 12
+- 🐘 PHP 8.2+
+- ⚙️ Filament 3
+- 🗄️ MariaDB 10.11
+- 🧩 Blade
+- ⚡ Vite
+- 🎨 Tailwind CSS
+- 🐳 Docker dan Docker Compose
 
-## Struktur Project
+## 🗂️ Struktur Project
 
 ```text
 .
@@ -55,17 +55,17 @@ Project ini dibuat sebagai website portfolio yang tidak hanya statis, tetapi jug
 └── README
 ```
 
-## Halaman Website
+## 🌐 Halaman Website
 
 | URL | Keterangan |
 | --- | --- |
-| `/` | Halaman utama portfolio |
-| `/projects/{slug}` | Halaman detail laporan project |
-| `/laporan-uts` | Halaman khusus Laporan UTS |
-| `/laporan-uts/pdf` | File PDF Laporan UTS |
-| `/admin` | Panel admin Filament |
+| `/` | 🏠 Halaman utama portfolio |
+| `/projects/{slug}` | 📄 Halaman detail laporan project |
+| `/laporan-uts` | 📝 Halaman khusus Laporan UTS |
+| `/laporan-uts/pdf` | 📎 File PDF Laporan UTS |
+| `/admin` | 🛠️ Panel admin Filament |
 
-## Laporan UTS
+## 📚 Laporan UTS
 
 File PDF laporan UTS sudah disimpan di:
 
@@ -85,61 +85,61 @@ Route halaman dan PDF ada di:
 src/routes/web.php
 ```
 
-## Instalasi dengan Docker
+## 🐳 Instalasi dengan Docker
 
 Pastikan Docker dan Docker Compose sudah terpasang.
 
-1. Clone atau buka folder project ini.
+1. 📦 Clone atau buka folder project ini.
 
-2. Jalankan container:
+2. ▶️ Jalankan container:
 
 ```bash
 docker compose up -d --build
 ```
 
-3. Masuk ke container PHP:
+3. 🐘 Masuk ke container PHP:
 
 ```bash
 docker compose exec php bash
 ```
 
-4. Install dependency Laravel:
+4. 📥 Install dependency Laravel:
 
 ```bash
 composer install
 ```
 
-5. Salin file environment:
+5. 🧾 Salin file environment:
 
 ```bash
 cp .env.example .env
 ```
 
-6. Generate app key:
+6. 🔑 Generate app key:
 
 ```bash
 php artisan key:generate
 ```
 
-7. Jalankan migration dan seeder:
+7. 🌱 Jalankan migration dan seeder:
 
 ```bash
 php artisan migrate --seed
 ```
 
-8. Install dependency frontend:
+8. 🎨 Install dependency frontend:
 
 ```bash
 npm install
 ```
 
-9. Build asset frontend:
+9. 🏗️ Build asset frontend:
 
 ```bash
 npm run build
 ```
 
-## Menjalankan Tanpa Docker
+## 💻 Menjalankan Tanpa Docker
 
 Masuk ke folder `src`, lalu jalankan:
 
@@ -159,7 +159,7 @@ Setelah server berjalan, buka:
 http://127.0.0.1:8000
 ```
 
-## Konfigurasi Database
+## 🗄️ Konfigurasi Database
 
 Default database pada `.env.example`:
 
@@ -174,7 +174,7 @@ DB_PASSWORD=p455w0rd
 
 Jika menjalankan tanpa Docker, sesuaikan `DB_HOST`, `DB_PORT`, `DB_DATABASE`, `DB_USERNAME`, dan `DB_PASSWORD` dengan database lokal.
 
-## Akun Admin Default
+## 🔐 Akun Admin Default
 
 Seeder membuat akun admin berikut:
 
@@ -190,7 +190,7 @@ Panel admin dapat dibuka di:
 /admin
 ```
 
-## Data Seeder
+## 🌱 Data Seeder
 
 Seeder utama berada di:
 
@@ -200,9 +200,9 @@ src/database/seeders/DatabaseSeeder.php
 
 Seeder yang dipanggil:
 
-- `RoleSeeder`
-- `UserSeeder`
-- `ProjectSeeder`
+- 🛡️ `RoleSeeder`
+- 👤 `UserSeeder`
+- 📁 `ProjectSeeder`
 
 Data project awal berada di:
 
@@ -210,15 +210,15 @@ Data project awal berada di:
 src/database/seeders/ProjectSeeder.php
 ```
 
-## Fitur Admin
+## 🛠️ Fitur Admin
 
 Panel admin Filament menyediakan pengelolaan:
 
-- User
-- Project
-- Pesan kontak
-- Role dan permission
-- Log aktivitas
+- 👤 User
+- 📁 Project
+- 💬 Pesan kontak
+- 🛡️ Role dan permission
+- 📊 Log aktivitas
 
 Resource utama berada di:
 
@@ -226,7 +226,7 @@ Resource utama berada di:
 src/app/Filament/Admin/Resources/
 ```
 
-## Route Penting
+## 🧭 Route Penting
 
 Route publik utama:
 
@@ -238,7 +238,7 @@ Route::get('/projects/{project:slug}', ...)->name('projects.show');
 Route::post('/contact', ...)->name('contact.store');
 ```
 
-## Testing
+## ✅ Testing
 
 Untuk menjalankan test:
 
@@ -252,8 +252,8 @@ Atau menggunakan Pest langsung:
 ./vendor/bin/pest
 ```
 
-## Catatan
+## 📝 Catatan
 
-- Jika PDF tidak muncul, pastikan file `src/public/files/laporan-uts.pdf` ada.
-- Jika halaman utama error karena database, pastikan migration sudah berjalan dan koneksi database benar.
-- Jika menggunakan Docker, jalankan command Laravel dari dalam container `php`.
+- 📎 Jika PDF tidak muncul, pastikan file `src/public/files/laporan-uts.pdf` ada.
+- 🗄️ Jika halaman utama error karena database, pastikan migration sudah berjalan dan koneksi database benar.
+- 🐳 Jika menggunakan Docker, jalankan command Laravel dari dalam container `php`.
