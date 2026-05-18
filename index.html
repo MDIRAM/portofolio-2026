@@ -226,18 +226,18 @@
                 linear-gradient(180deg, transparent 58%, rgba(9, 10, 15, 0.36));
         }
 
-        .section {
+        .portfolio {
             width: min(1120px, 100%);
             margin: 0 auto;
             padding: 0 clamp(28px, 5vw, 72px) clamp(56px, 8vw, 96px);
         }
 
-        .section-header {
+        .portfolio-header {
             max-width: 680px;
             margin-bottom: 28px;
         }
 
-        .section h2 {
+        .portfolio h2 {
             margin: 0;
             color: var(--text);
             font-size: clamp(32px, 4.5vw, 52px);
@@ -245,7 +245,7 @@
             letter-spacing: 0;
         }
 
-        .section-text {
+        .portfolio-text {
             margin: 16px 0 0;
             color: var(--muted);
             font-size: 16px;
@@ -288,43 +288,6 @@
             font-weight: 700;
         }
 
-        .project-meta {
-            display: flex;
-            align-items: center;
-            justify-content: space-between;
-            gap: 14px;
-            margin-top: 20px;
-        }
-
-        .project-status {
-            display: inline-flex;
-            align-items: center;
-            min-height: 30px;
-            padding: 0 10px;
-            border: 1px solid rgba(37, 224, 184, 0.24);
-            border-radius: 999px;
-            color: var(--accent-2);
-            background: rgba(37, 224, 184, 0.08);
-            font-size: 12px;
-            font-weight: 800;
-        }
-
-        .project-progress {
-            flex: 1;
-            height: 8px;
-            overflow: hidden;
-            border-radius: 999px;
-            background: rgba(255, 255, 255, 0.08);
-        }
-
-        .project-progress i {
-            display: block;
-            width: var(--progress);
-            height: 100%;
-            border-radius: inherit;
-            background: linear-gradient(90deg, var(--accent-2), var(--accent));
-        }
-
         .project-link {
             display: inline-flex;
             margin-top: 18px;
@@ -335,97 +298,6 @@
 
         .project-link:hover {
             color: var(--accent-2);
-        }
-
-        .contact-layout {
-            display: grid;
-            grid-template-columns: minmax(0, 0.8fr) minmax(320px, 1.2fr);
-            gap: 24px;
-            align-items: start;
-        }
-
-        .contact-note {
-            padding: 22px;
-            border: 1px solid rgba(255, 255, 255, 0.1);
-            border-radius: 8px;
-            background: rgba(255, 255, 255, 0.045);
-        }
-
-        .contact-note p {
-            margin: 0;
-            color: var(--muted);
-            font-size: 15px;
-            line-height: 1.7;
-        }
-
-        .contact-form {
-            display: grid;
-            gap: 14px;
-        }
-
-        .form-grid {
-            display: grid;
-            grid-template-columns: repeat(2, minmax(0, 1fr));
-            gap: 14px;
-        }
-
-        .field {
-            display: grid;
-            gap: 8px;
-        }
-
-        .field.full {
-            grid-column: 1 / -1;
-        }
-
-        .field label {
-            color: var(--text);
-            font-size: 14px;
-            font-weight: 700;
-        }
-
-        .field input,
-        .field textarea {
-            width: 100%;
-            border: 1px solid rgba(255, 255, 255, 0.12);
-            border-radius: 8px;
-            outline: none;
-            color: var(--text);
-            background: rgba(255, 255, 255, 0.045);
-            font: inherit;
-        }
-
-        .field input {
-            min-height: 48px;
-            padding: 0 14px;
-        }
-
-        .field textarea {
-            min-height: 140px;
-            resize: vertical;
-            padding: 14px;
-            line-height: 1.6;
-        }
-
-        .field input:focus,
-        .field textarea:focus {
-            border-color: rgba(37, 224, 184, 0.5);
-        }
-
-        .form-status {
-            margin: 0 0 14px;
-            padding: 12px 14px;
-            border-radius: 8px;
-            color: var(--accent-2);
-            background: rgba(37, 224, 184, 0.08);
-            font-size: 14px;
-            font-weight: 700;
-        }
-
-        .form-error {
-            color: #ff8f8f;
-            font-size: 13px;
-            line-height: 1.5;
         }
 
         @media (max-width: 920px) {
@@ -445,9 +317,7 @@
                 aspect-ratio: 520 / 590;
             }
 
-            .project-grid,
-            .contact-layout,
-            .form-grid {
+            .project-grid {
                 grid-template-columns: 1fr;
             }
         }
@@ -479,7 +349,7 @@
                 width: calc(100% - 28px);
             }
 
-            .section {
+            .portfolio {
                 padding: 0 20px 52px;
             }
         }
@@ -497,8 +367,6 @@
 
                 <div class="actions">
                     <a class="button primary" href="#projects">Portofolio</a>
-                    <a class="button secondary" href="{{ route('reports.uts') }}">Laporan UTS</a>
-                    <a class="button secondary" href="#contact">Kontak</a>
                 </div>
 
                 <ul class="stack" aria-label="Technology stack">
@@ -514,111 +382,35 @@
             <div class="visual">
                 <div class="photo-card">
                     <div class="photo-fallback" aria-hidden="true">&lt;/&gt;</div>
-                    <img src="{{ asset('coverimg/dika.png') }}" alt="Foto profil Dika" onerror="this.hidden = true">
+                    <img src="src/public/coverimg/dika.png" alt="Foto profil Dika" onerror="this.hidden = true">
                 </div>
             </div>
         </section>
 
-        <section class="section portfolio" id="projects" aria-label="Portfolio projects">
-            <div class="section-header">
+        <section class="portfolio" id="projects" aria-label="Portfolio projects">
+            <div class="portfolio-header">
                 <p class="eyebrow">Portofolio</p>
                 <h2>Project yang saya kerjakan.</h2>
-                <p class="section-text">
+                <p class="portfolio-text">
                     Beberapa project web yang saya buat untuk melatih frontend, backend, database, dan tampilan responsif.
                 </p>
             </div>
 
             <div class="project-grid">
-                @forelse ($projects as $project)
-                    <article class="project-card">
-                        <h3>{{ $project->title }}</h3>
-                        <p>{{ $project->description }}</p>
+                <article class="project-card">
+                    <h3>2D & 3D Kalkulus 2</h3>
+                    <p>Project pembelajaran kalkulus yang menampilkan visualisasi 2D dan 3D supaya materi matematika lebih mudah dipahami.</p>
+                    <span>Kalkulus, 2D, 3D</span>
+                    <a class="project-link" href="https://github.com/MDIRAM/2D-3D-Kalkulus-2.git" target="_blank" rel="noreferrer">Lihat GitHub</a>
+                </article>
 
-                        @if ($project->technologies)
-                            <span>{{ implode(', ', $project->technologies) }}</span>
-                        @endif
+                <article class="project-card">
+                    <h3>TierlistMu</h3>
+                    <p>Aplikasi web untuk membuat dan mengelola tier list dengan tampilan yang mudah dipakai.</p>
+                    <span>Laravel, PHP, MySQL</span>
+                    <a class="project-link" href="https://github.com/MDIRAM/TierlistMu.git" target="_blank" rel="noreferrer">Lihat GitHub</a>
+                </article>
 
-                        <div class="project-meta">
-                            <b class="project-status">{{ $project->status }} {{ $project->progress }}%</b>
-                            <div class="project-progress" aria-label="Progress {{ $project->progress }} persen">
-                                <i style="--progress: {{ $project->progress }}%"></i>
-                            </div>
-                        </div>
-
-                        <a class="project-link" href="{{ route('projects.show', $project) }}">Lihat Detail Laporan</a>
-
-                        @if ($project->github_url)
-                            <a class="project-link" href="{{ $project->github_url }}" target="_blank" rel="noreferrer">Lihat GitHub</a>
-                        @endif
-                    </article>
-                @empty
-                    <article class="project-card">
-                        <h3>Belum ada project</h3>
-                        <p>Project yang sudah masuk database akan tampil di bagian ini.</p>
-                    </article>
-                @endforelse
-            </div>
-        </section>
-
-        <section class="section contact" id="contact" aria-label="Contact form">
-            <div class="section-header">
-                <p class="eyebrow">Contact</p>
-                <h2>Hubungi saya.</h2>
-                <p class="section-text">
-                    Kirim pesan lewat form ini. Data pesan akan tersimpan ke database dan bisa saya cek dari halaman admin.
-                </p>
-            </div>
-
-            <div class="contact-layout">
-                <div class="contact-note">
-                    <p>
-                        Terbuka untuk diskusi project, kerja sama, atau pertanyaan seputar website yang saya buat.
-                    </p>
-                </div>
-
-                <form class="contact-form" action="{{ route('contact.store') }}" method="POST">
-                    @csrf
-
-                    @if (session('contact_success'))
-                        <p class="form-status">{{ session('contact_success') }}</p>
-                    @endif
-
-                    <div class="form-grid">
-                        <div class="field">
-                            <label for="name">Nama</label>
-                            <input id="name" name="name" type="text" value="{{ old('name') }}" required>
-                            @error('name')
-                                <span class="form-error">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="field">
-                            <label for="email">Email</label>
-                            <input id="email" name="email" type="email" value="{{ old('email') }}" required>
-                            @error('email')
-                                <span class="form-error">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="field full">
-                            <label for="subject">Subjek</label>
-                            <input id="subject" name="subject" type="text" value="{{ old('subject') }}">
-                            @error('subject')
-                                <span class="form-error">{{ $message }}</span>
-                            @enderror
-                        </div>
-
-                        <div class="field full">
-                            <label for="message">Pesan</label>
-                            <textarea id="message" name="message" required>{{ old('message') }}</textarea>
-                            @error('message')
-                                <span class="form-error">{{ $message }}</span>
-                            @enderror
-                        </div>
-                    </div>
-
-                    <button class="button primary" type="submit">Kirim Pesan</button>
-                </form>
             </div>
         </section>
     </main>
