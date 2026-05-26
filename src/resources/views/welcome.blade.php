@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Programmer Portfolio</title>
+    <title>{{ $content['meta_title'] }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -487,44 +487,42 @@
 </head>
 <body>
     <main class="page">
-        <section class="hero" aria-label="Programmer portfolio introduction">
+        <section class="hero" aria-label="{{ $content['hero_aria'] }}">
             <div class="intro">
-                <p class="eyebrow">Programmer Portfolio</p>
-                <h1>Halo, saya <span>Dika</span> seorang programer.</h1>
+                <p class="eyebrow">{{ $content['hero_eyebrow'] }}</p>
+                <h1>{{ $content['hero_title_prefix'] }}<span>{{ $content['hero_title_name'] }}</span>{{ $content['hero_title_suffix'] }}</h1>
                 <p class="summary">
-                    Saya fokus membuat aplikasi web yang cepat, mudah dipakai, dan gampang dikembangkan. Terbiasa membangun fitur dari tampilan, backend, database, sampai deployment.
+                    {{ $content['hero_summary'] }}
                 </p>
 
                 <div class="actions">
-                    <a class="button primary" href="#projects">Portofolio</a>
-                    <a class="button secondary" href="{{ route('reports.uts') }}">Laporan UTS</a>
-                    <a class="button secondary" href="#contact">Kontak</a>
+                    <a class="button primary" href="#projects">{{ $content['button_projects'] }}</a>
+                    <a class="button secondary" href="{{ route('reports.show') }}">{{ $content['button_report'] }}</a>
+                    <a class="button secondary" href="#contact">{{ $content['button_contact'] }}</a>
                 </div>
 
-                <ul class="stack" aria-label="Technology stack">
-                    <li>Laravel</li>
-                    <li>PHP</li>
-                    <li>JavaScript</li>
-                    <li>MySQL</li>
-                    <li>Tailwind CSS</li>
+                <ul class="stack" aria-label="{{ $content['stack_aria'] }}">
+                    @foreach ($content['stack_items'] as $stack)
+                        <li>{{ $stack }}</li>
+                    @endforeach
                 </ul>
 
             </div>
 
             <div class="visual">
                 <div class="photo-card">
-                    <div class="photo-fallback" aria-hidden="true">&lt;/&gt;</div>
-                    <img src="{{ asset('coverimg/dika.png') }}" alt="Foto profil Dika" onerror="this.hidden = true">
+                    <div class="photo-fallback" aria-hidden="true">{{ $content['photo_fallback'] }}</div>
+                    <img src="{{ asset('coverimg/dika.png') }}" alt="{{ $content['photo_alt'] }}" onerror="this.hidden = true">
                 </div>
             </div>
         </section>
 
-        <section class="section portfolio" id="projects" aria-label="Portfolio projects">
+        <section class="section portfolio" id="projects" aria-label="{{ $content['portfolio_aria'] }}">
             <div class="section-header">
-                <p class="eyebrow">Portofolio</p>
-                <h2>Project yang saya kerjakan.</h2>
+                <p class="eyebrow">{{ $content['portfolio_eyebrow'] }}</p>
+                <h2>{{ $content['portfolio_title'] }}</h2>
                 <p class="section-text">
-                    Beberapa project web yang saya buat untuk melatih frontend, backend, database, dan tampilan responsif.
+                    {{ $content['portfolio_text'] }}
                 </p>
             </div>
 
@@ -540,39 +538,37 @@
 
                         <div class="project-meta">
                             <b class="project-status">{{ $project->status }} {{ $project->progress }}%</b>
-                            <div class="project-progress" aria-label="Progress {{ $project->progress }} persen">
+                            <div class="project-progress" aria-label="{{ $content['project_progress_aria_prefix'] }}{{ $project->progress }}{{ $content['project_progress_aria_suffix'] }}">
                                 <i style="--progress: {{ $project->progress }}%"></i>
                             </div>
                         </div>
 
-                        <a class="project-link" href="{{ route('projects.show', $project) }}">Lihat Detail Laporan</a>
-
                         @if ($project->github_url)
-                            <a class="project-link" href="{{ $project->github_url }}" target="_blank" rel="noreferrer">Lihat GitHub</a>
+                            <a class="project-link" href="{{ $project->github_url }}" target="_blank" rel="noreferrer">{{ $content['project_github_label'] }}</a>
                         @endif
                     </article>
                 @empty
                     <article class="project-card">
-                        <h3>Belum ada project</h3>
-                        <p>Project yang sudah masuk database akan tampil di bagian ini.</p>
+                        <h3>{{ $content['project_empty_title'] }}</h3>
+                        <p>{{ $content['project_empty_text'] }}</p>
                     </article>
                 @endforelse
             </div>
         </section>
 
-        <section class="section contact" id="contact" aria-label="Contact form">
+        <section class="section contact" id="contact" aria-label="{{ $content['contact_aria'] }}">
             <div class="section-header">
-                <p class="eyebrow">Contact</p>
-                <h2>Hubungi saya.</h2>
+                <p class="eyebrow">{{ $content['contact_eyebrow'] }}</p>
+                <h2>{{ $content['contact_title'] }}</h2>
                 <p class="section-text">
-                    Kirim pesan lewat form ini. Data pesan akan tersimpan ke database dan bisa saya cek dari halaman admin.
+                    {{ $content['contact_text'] }}
                 </p>
             </div>
 
             <div class="contact-layout">
                 <div class="contact-note">
                     <p>
-                        Terbuka untuk diskusi project, kerja sama, atau pertanyaan seputar website yang saya buat.
+                        {{ $content['contact_note'] }}
                     </p>
                 </div>
 
@@ -585,7 +581,7 @@
 
                     <div class="form-grid">
                         <div class="field">
-                            <label for="name">Nama</label>
+                            <label for="name">{{ $content['contact_label_name'] }}</label>
                             <input id="name" name="name" type="text" value="{{ old('name') }}" required>
                             @error('name')
                                 <span class="form-error">{{ $message }}</span>
@@ -593,7 +589,7 @@
                         </div>
 
                         <div class="field">
-                            <label for="email">Email</label>
+                            <label for="email">{{ $content['contact_label_email'] }}</label>
                             <input id="email" name="email" type="email" value="{{ old('email') }}" required>
                             @error('email')
                                 <span class="form-error">{{ $message }}</span>
@@ -601,7 +597,7 @@
                         </div>
 
                         <div class="field full">
-                            <label for="subject">Subjek</label>
+                            <label for="subject">{{ $content['contact_label_subject'] }}</label>
                             <input id="subject" name="subject" type="text" value="{{ old('subject') }}">
                             @error('subject')
                                 <span class="form-error">{{ $message }}</span>
@@ -609,7 +605,7 @@
                         </div>
 
                         <div class="field full">
-                            <label for="message">Pesan</label>
+                            <label for="message">{{ $content['contact_label_message'] }}</label>
                             <textarea id="message" name="message" required>{{ old('message') }}</textarea>
                             @error('message')
                                 <span class="form-error">{{ $message }}</span>
@@ -617,7 +613,7 @@
                         </div>
                     </div>
 
-                    <button class="button primary" type="submit">Kirim Pesan</button>
+                    <button class="button primary" type="submit">{{ $content['contact_submit_label'] }}</button>
                 </form>
             </div>
         </section>

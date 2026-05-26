@@ -2,6 +2,8 @@
 
 use App\Models\ContactMessage;
 use App\Models\Project;
+use App\Models\Report;
+use App\Models\SiteContent;
 use Illuminate\Foundation\Http\Middleware\VerifyCsrfToken;
 use Illuminate\Http\Request;
 use Illuminate\Session\Middleware\StartSession;
@@ -29,12 +31,13 @@ Route::get('/', function () {
         ->orderBy('sort_order')
         ->orderByDesc('created_at')
         ->get();
+    $content = SiteContent::valuesForPage('welcome');
 
-    return view('welcome', compact('projects'));
+    return view('welcome', compact('content', 'projects'));
 });
 
 Route::get('/laporan-uts', function () {
-    return view('reports.uts');
+    return redirect()->route('reports.show');
 })
     ->withoutMiddleware([StartSession::class, ShareErrorsFromSession::class, VerifyCsrfToken::class])
     ->name('reports.uts');
@@ -52,10 +55,35 @@ Route::get('/laporan-uts/pdf', function () {
     ->withoutMiddleware([StartSession::class, ShareErrorsFromSession::class, VerifyCsrfToken::class])
     ->name('reports.uts.pdf');
 
+Route::get('/laporan', function () {
+    $report = Report::where('slug', 'panduangame')
+        ->where('is_published', true)
+        ->firstOrFail();
+    $content = SiteContent::valuesForPage('reports.show');
+
+    return view('reports.show', compact('content', 'report'));
+})
+    ->withoutMiddleware([StartSession::class, ShareErrorsFromSession::class, VerifyCsrfToken::class])
+    ->name('reports.show');
+
+Route::get('/laporan/pdf', function () {
+    $path = public_path('files/laporan-uts.pdf');
+
+    abort_unless(file_exists($path), 404);
+
+    return response()->file($path, [
+        'Content-Type' => 'application/pdf',
+        'Content-Disposition' => 'inline; filename="Laporan Lengkap PanduanGame.pdf"',
+    ]);
+})
+    ->withoutMiddleware([StartSession::class, ShareErrorsFromSession::class, VerifyCsrfToken::class])
+    ->name('reports.full-pdf');
+
 Route::get('/projects/{project:slug}', function (Project $project) {
     abort_unless($project->is_active, 404);
+    $content = SiteContent::valuesForPage('projects.show');
 
-    return view('projects.show', compact('project'));
+    return view('projects.show', compact('content', 'project'));
 })->name('projects.show');
 
 Route::post('/contact', function (Request $request) {
@@ -69,5 +97,5 @@ Route::post('/contact', function (Request $request) {
     ContactMessage::create($data);
 
     return back()
-        ->with('contact_success', 'Pesan berhasil dikirim. Terima kasih sudah menghubungi saya.');
+        ->with('contact_success', SiteContent::value('welcome', 'contact_success_message'));
 })->name('contact.store');

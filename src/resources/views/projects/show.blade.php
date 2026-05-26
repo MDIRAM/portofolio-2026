@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>{{ $project->title }} - Laporan Awal</title>
+    <title>{{ $project->title }}{{ $content['title_suffix'] }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -293,48 +293,48 @@
 </head>
 <body>
     <header class="wrap topbar">
-        <a class="back" href="{{ url('/') }}">Kembali ke Portfolio</a>
-        <span class="eyebrow">Laporan Awal Project Akhir</span>
+        <a class="back" href="{{ url('/') }}">{{ $content['back_label'] }}</a>
+        <span class="eyebrow">{{ $content['page_badge'] }}</span>
     </header>
 
     <main class="wrap">
         <section class="hero">
             <div class="hero-main">
-                <p class="eyebrow">Showcase / Project</p>
+                <p class="eyebrow">{{ $content['hero_eyebrow'] }}</p>
                 <h1>{{ $project->title }}</h1>
                 <p class="lead">{{ $project->description }}</p>
 
                 <div class="actions">
                     @if ($project->github_url)
-                        <a class="button primary" href="{{ $project->github_url }}" target="_blank" rel="noreferrer">Source Code GitHub</a>
+                        <a class="button primary" href="{{ $project->github_url }}" target="_blank" rel="noreferrer">{{ $content['github_button'] }}</a>
                     @endif
 
                     @if ($project->live_url)
-                        <a class="button secondary" href="{{ $project->live_url }}" target="_blank" rel="noreferrer">Live Demo</a>
+                        <a class="button secondary" href="{{ $project->live_url }}" target="_blank" rel="noreferrer">{{ $content['live_button'] }}</a>
                     @endif
 
                     @if ($project->report_file)
-                        <a class="button secondary" href="{{ asset('storage/'.$project->report_file) }}" target="_blank" rel="noreferrer">PDF Laporan</a>
+                        <a class="button secondary" href="{{ asset('storage/'.$project->report_file) }}" target="_blank" rel="noreferrer">{{ $content['report_button'] }}</a>
                     @endif
                 </div>
             </div>
 
             <aside class="status-panel panel">
                 <div class="metric">
-                    <span>Status Progress</span>
+                    <span>{{ $content['status_label'] }}</span>
                     <strong>{{ $project->status }}</strong>
                 </div>
 
                 <div class="metric">
-                    <span>Persentase</span>
+                    <span>{{ $content['percentage_label'] }}</span>
                     <strong>{{ $project->progress }}%</strong>
-                    <div class="bar" aria-label="Progress {{ $project->progress }} persen">
+                    <div class="bar" aria-label="{{ $content['progress_aria_prefix'] }}{{ $project->progress }}{{ $content['progress_aria_suffix'] }}">
                         <i style="--progress: {{ $project->progress }}%"></i>
                     </div>
                 </div>
 
                 @if ($project->technologies)
-                    <ul class="stack" aria-label="Tech stack">
+                    <ul class="stack" aria-label="{{ $content['tech_stack_aria'] }}">
                         @foreach ($project->technologies as $technology)
                             <li>{{ $technology }}</li>
                         @endforeach
@@ -345,12 +345,12 @@
 
         <section class="content">
             <article class="panel">
-                <h2>Analisis Masalah</h2>
-                <p>{{ $project->problem_analysis ?: 'Analisis masalah belum diisi dari panel admin.' }}</p>
+                <h2>{{ $content['analysis_heading'] }}</h2>
+                <p>{{ $project->problem_analysis ?: $content['analysis_empty'] }}</p>
             </article>
 
             <article class="panel">
-                <h2>Kebutuhan Sistem</h2>
+                <h2>{{ $content['requirements_heading'] }}</h2>
                 @if ($project->system_requirements)
                     <ul class="requirement-list">
                         @foreach ($project->system_requirements as $requirement)
@@ -358,22 +358,22 @@
                         @endforeach
                     </ul>
                 @else
-                    <p>Kebutuhan sistem belum diisi dari panel admin.</p>
+                    <p>{{ $content['requirements_empty'] }}</p>
                 @endif
             </article>
 
             <article class="panel">
-                <h2>Arsitektur & Tech Stack</h2>
-                <p>{{ $project->architecture ?: 'Arsitektur dan tech stack belum diisi dari panel admin.' }}</p>
+                <h2>{{ $content['architecture_heading'] }}</h2>
+                <p>{{ $project->architecture ?: $content['architecture_empty'] }}</p>
             </article>
 
             <article class="panel">
-                <h2>Implementasi Teknis</h2>
-                <p>Website menggunakan pola MVC Laravel, database MySQL, halaman publik portfolio, form kontak dinamis, dan panel admin Filament untuk CRUD project serta monitoring pesan masuk.</p>
+                <h2>{{ $content['implementation_heading'] }}</h2>
+                <p>{{ $content['implementation_text'] }}</p>
             </article>
 
             <article class="diagram-card">
-                <h2>Rencana Perancangan Sistem</h2>
+                <h2>{{ $content['diagram_heading'] }}</h2>
                 @if ($project->diagram_steps)
                     <ol class="flow">
                         @foreach ($project->diagram_steps as $step)
@@ -381,7 +381,7 @@
                         @endforeach
                     </ol>
                 @else
-                    <p>Flowchart belum diisi dari panel admin.</p>
+                    <p>{{ $content['diagram_empty'] }}</p>
                 @endif
             </article>
         </section>

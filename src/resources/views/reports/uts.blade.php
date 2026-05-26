@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html lang="id">
+@php($content = \App\Models\SiteContent::valuesForPage('reports.uts'))
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Laporan UTS - Portfolio Dika</title>
+    <title>{{ $content['meta_title'] }}</title>
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
@@ -158,27 +159,27 @@
 </head>
 <body>
     <header class="wrap topbar">
-        <a class="back" href="{{ url('/') }}">Kembali ke Portfolio</a>
-        <span class="eyebrow">Halaman Laporan UTS</span>
+        <a class="back" href="{{ url('/') }}">{{ $content['back_label'] }}</a>
+        <span class="eyebrow">{{ $content['top_badge'] }}</span>
     </header>
 
     <main class="wrap">
         <section class="hero">
             <div>
-                <p class="eyebrow">PDF Laporan</p>
-                <h1>Laporan UTS Portfolio</h1>
+                <p class="eyebrow">{{ $content['hero_eyebrow'] }}</p>
+                <h1>{{ $content['hero_title'] }}</h1>
                 <p class="lead">
-                    Halaman ini khusus untuk menampilkan file laporan UTS dalam bentuk PDF, terpisah dari halaman utama dan halaman detail project.
+                    {{ $content['hero_lead'] }}
                 </p>
             </div>
 
             <div class="actions">
-                <a class="button primary" href="{{ route('reports.uts.pdf') }}" target="_blank" rel="noreferrer">Buka PDF</a>
+                <a class="button primary" href="{{ route('reports.uts.pdf') }}" target="_blank" rel="noreferrer">{{ $content['open_pdf_label'] }}</a>
             </div>
         </section>
 
-        <section class="pdf-shell" aria-label="Preview PDF Laporan UTS">
-            <iframe src="{{ route('reports.uts.pdf') }}" title="Preview PDF Laporan UTS"></iframe>
+        <section class="pdf-shell" aria-label="{{ $content['pdf_shell_aria'] }}">
+            <iframe src="{{ route('reports.uts.pdf') }}" title="{{ $content['iframe_title'] }}"></iframe>
         </section>
     </main>
 </body>
