@@ -75,6 +75,10 @@ class SiteContent extends Model
     {
         $path = filled($path) ? $path : $fallback;
 
+        if (blank($path)) {
+            return '';
+        }
+
         if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
             return $path;
         }

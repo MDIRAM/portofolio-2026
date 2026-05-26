@@ -490,10 +490,11 @@
         <section class="hero" aria-label="{{ $content['hero_eyebrow'] }}">
             <div class="intro">
                 <p class="eyebrow">{{ $content['hero_eyebrow'] }}</p>
-                @php($heroTitleParts = explode('Dika', $content['hero_title'], 2))
+                @php($profileName = $content['profile_name'] ?? '')
+                @php($heroTitleParts = filled($profileName) ? explode($profileName, $content['hero_title'], 2) : [])
                 <h1>
                     @if (count($heroTitleParts) === 2)
-                        {{ $heroTitleParts[0] }}<span>Dika</span>{{ $heroTitleParts[1] }}
+                        {{ $heroTitleParts[0] }}<span>{{ $profileName }}</span>{{ $heroTitleParts[1] }}
                     @else
                         {{ $content['hero_title'] }}
                     @endif
@@ -519,7 +520,7 @@
             <div class="visual">
                 <div class="photo-card">
                     <div class="photo-fallback" aria-hidden="true">&lt;/&gt;</div>
-                    <img src="{{ \App\Models\SiteContent::mediaUrl($content['profile_photo'] ?? null, 'coverimg/dika.png') }}" alt="Foto profil Dika" onerror="this.hidden = true">
+                    <img src="{{ \App\Models\SiteContent::mediaUrl($content['profile_photo'] ?? null, '') }}" alt="Foto profil {{ $profileName }}" onerror="this.hidden = true">
                 </div>
             </div>
         </section>

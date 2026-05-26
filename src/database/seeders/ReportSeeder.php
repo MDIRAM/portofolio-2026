@@ -64,6 +64,7 @@ class ReportSeeder extends Seeder
                         'description' => 'Menunjukkan rancangan relasi data utama seperti users, games, categories, dan guides.',
                     ],
                 ],
+                'pdf_path' => 'files/laporan-uts.pdf',
                 'is_published' => true,
             ],
         );

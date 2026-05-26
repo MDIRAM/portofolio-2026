@@ -43,13 +43,19 @@ Route::get('/laporan-uts', function () {
     ->name('reports.uts');
 
 Route::get('/laporan-uts/pdf', function () {
-    $path = public_path('files/laporan-uts.pdf');
+    $report = Report::where('slug', 'panduangame')
+        ->where('is_published', true)
+        ->firstOrFail();
+
+    abort_unless(filled($report->pdf_path), 404);
+
+    $path = public_path(ltrim($report->pdf_path, '/'));
 
     abort_unless(file_exists($path), 404);
 
     return response()->file($path, [
         'Content-Type' => 'application/pdf',
-        'Content-Disposition' => 'inline; filename="Laporan UTS Portfolio.pdf"',
+        'Content-Disposition' => 'inline; filename="' . basename($report->pdf_path) . '"',
     ]);
 })
     ->withoutMiddleware([StartSession::class, ShareErrorsFromSession::class, VerifyCsrfToken::class])
@@ -67,13 +73,19 @@ Route::get('/laporan', function () {
     ->name('reports.show');
 
 Route::get('/laporan/pdf', function () {
-    $path = public_path('files/laporan-uts.pdf');
+    $report = Report::where('slug', 'panduangame')
+        ->where('is_published', true)
+        ->firstOrFail();
+
+    abort_unless(filled($report->pdf_path), 404);
+
+    $path = public_path(ltrim($report->pdf_path, '/'));
 
     abort_unless(file_exists($path), 404);
 
     return response()->file($path, [
         'Content-Type' => 'application/pdf',
-        'Content-Disposition' => 'inline; filename="Laporan Lengkap PanduanGame.pdf"',
+        'Content-Disposition' => 'inline; filename="' . basename($report->pdf_path) . '"',
     ]);
 })
     ->withoutMiddleware([StartSession::class, ShareErrorsFromSession::class, VerifyCsrfToken::class])

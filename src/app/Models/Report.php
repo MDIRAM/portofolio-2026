@@ -15,6 +15,7 @@ class Report extends Model
         'architecture',
         'tech_stack',
         'diagrams',
+        'pdf_path',
         'is_published',
     ];
 

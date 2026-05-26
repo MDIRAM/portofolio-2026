@@ -101,6 +101,12 @@ class ReportResource extends Resource
                     ])
                     ->columns(2)
                     ->columnSpan('full'),
+
+                Forms\Components\TextInput::make('pdf_path')
+                    ->label('Path PDF laporan')
+                    ->helperText('Contoh: files/laporan-uts.pdf')
+                    ->maxLength(255)
+                    ->columnSpan('full'),
             ])
             ->columns(2);
     }

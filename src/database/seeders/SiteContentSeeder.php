@@ -67,6 +67,7 @@ class SiteContentSeeder extends Seeder
         return [
             ['welcome', 'meta', 'meta_title', 'Meta title', 'text', 'Programmer Portfolio'],
             ['welcome', 'hero', 'hero_eyebrow', 'Hero eyebrow', 'text', 'Programmer Portfolio'],
+            ['welcome', 'hero', 'profile_name', 'Profile name', 'text', 'Dika'],
             ['welcome', 'hero', 'hero_title', 'Hero title', 'text', 'Halo, saya Dika seorang programer.'],
             ['welcome', 'hero', 'hero_summary', 'Hero summary', 'textarea', 'Saya fokus membuat aplikasi web yang cepat, mudah dipakai, dan gampang dikembangkan. Terbiasa membangun fitur dari tampilan, backend, database, sampai deployment.'],
             ['welcome', 'hero', 'hero_buttons', 'Hero buttons', 'json', [
