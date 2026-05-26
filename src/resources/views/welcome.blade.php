@@ -487,21 +487,28 @@
 </head>
 <body>
     <main class="page">
-        <section class="hero" aria-label="{{ $content['hero_aria'] }}">
+        <section class="hero" aria-label="{{ $content['hero_eyebrow'] }}">
             <div class="intro">
                 <p class="eyebrow">{{ $content['hero_eyebrow'] }}</p>
-                <h1>{{ $content['hero_title_prefix'] }}<span>{{ $content['hero_title_name'] }}</span>{{ $content['hero_title_suffix'] }}</h1>
+                @php($heroTitleParts = explode('Dika', $content['hero_title'], 2))
+                <h1>
+                    @if (count($heroTitleParts) === 2)
+                        {{ $heroTitleParts[0] }}<span>Dika</span>{{ $heroTitleParts[1] }}
+                    @else
+                        {{ $content['hero_title'] }}
+                    @endif
+                </h1>
                 <p class="summary">
                     {{ $content['hero_summary'] }}
                 </p>
 
                 <div class="actions">
-                    <a class="button primary" href="#projects">{{ $content['button_projects'] }}</a>
-                    <a class="button secondary" href="{{ route('reports.show') }}">{{ $content['button_report'] }}</a>
-                    <a class="button secondary" href="#contact">{{ $content['button_contact'] }}</a>
+                    <a class="button primary" href="#projects">{{ $content['hero_buttons']['projects'] }}</a>
+                    <a class="button secondary" href="{{ route('reports.show') }}">{{ $content['hero_buttons']['report'] }}</a>
+                    <a class="button secondary" href="#contact">{{ $content['hero_buttons']['contact'] }}</a>
                 </div>
 
-                <ul class="stack" aria-label="{{ $content['stack_aria'] }}">
+                <ul class="stack" aria-label="Technology stack">
                     @foreach ($content['stack_items'] as $stack)
                         <li>{{ $stack }}</li>
                     @endforeach
@@ -511,13 +518,13 @@
 
             <div class="visual">
                 <div class="photo-card">
-                    <div class="photo-fallback" aria-hidden="true">{{ $content['photo_fallback'] }}</div>
-                    <img src="{{ asset('coverimg/dika.png') }}" alt="{{ $content['photo_alt'] }}" onerror="this.hidden = true">
+                    <div class="photo-fallback" aria-hidden="true">&lt;/&gt;</div>
+                    <img src="{{ \App\Models\SiteContent::mediaUrl($content['profile_photo'] ?? null, 'coverimg/dika.png') }}" alt="Foto profil Dika" onerror="this.hidden = true">
                 </div>
             </div>
         </section>
 
-        <section class="section portfolio" id="projects" aria-label="{{ $content['portfolio_aria'] }}">
+        <section class="section portfolio" id="projects" aria-label="{{ $content['portfolio_eyebrow'] }}">
             <div class="section-header">
                 <p class="eyebrow">{{ $content['portfolio_eyebrow'] }}</p>
                 <h2>{{ $content['portfolio_title'] }}</h2>
@@ -538,25 +545,25 @@
 
                         <div class="project-meta">
                             <b class="project-status">{{ $project->status }} {{ $project->progress }}%</b>
-                            <div class="project-progress" aria-label="{{ $content['project_progress_aria_prefix'] }}{{ $project->progress }}{{ $content['project_progress_aria_suffix'] }}">
+                            <div class="project-progress" aria-label="{{ $content['project_card_texts']['progress_aria_prefix'] }}{{ $project->progress }}{{ $content['project_card_texts']['progress_aria_suffix'] }}">
                                 <i style="--progress: {{ $project->progress }}%"></i>
                             </div>
                         </div>
 
                         @if ($project->github_url)
-                            <a class="project-link" href="{{ $project->github_url }}" target="_blank" rel="noreferrer">{{ $content['project_github_label'] }}</a>
+                            <a class="project-link" href="{{ $project->github_url }}" target="_blank" rel="noreferrer">{{ $content['project_card_texts']['github_label'] }}</a>
                         @endif
                     </article>
                 @empty
                     <article class="project-card">
-                        <h3>{{ $content['project_empty_title'] }}</h3>
-                        <p>{{ $content['project_empty_text'] }}</p>
+                        <h3>{{ $content['project_card_texts']['empty_title'] }}</h3>
+                        <p>{{ $content['project_card_texts']['empty_text'] }}</p>
                     </article>
                 @endforelse
             </div>
         </section>
 
-        <section class="section contact" id="contact" aria-label="{{ $content['contact_aria'] }}">
+        <section class="section contact" id="contact" aria-label="{{ $content['contact_eyebrow'] }}">
             <div class="section-header">
                 <p class="eyebrow">{{ $content['contact_eyebrow'] }}</p>
                 <h2>{{ $content['contact_title'] }}</h2>
@@ -581,7 +588,7 @@
 
                     <div class="form-grid">
                         <div class="field">
-                            <label for="name">{{ $content['contact_label_name'] }}</label>
+                            <label for="name">{{ $content['contact_labels']['name'] }}</label>
                             <input id="name" name="name" type="text" value="{{ old('name') }}" required>
                             @error('name')
                                 <span class="form-error">{{ $message }}</span>
@@ -589,7 +596,7 @@
                         </div>
 
                         <div class="field">
-                            <label for="email">{{ $content['contact_label_email'] }}</label>
+                            <label for="email">{{ $content['contact_labels']['email'] }}</label>
                             <input id="email" name="email" type="email" value="{{ old('email') }}" required>
                             @error('email')
                                 <span class="form-error">{{ $message }}</span>
@@ -597,7 +604,7 @@
                         </div>
 
                         <div class="field full">
-                            <label for="subject">{{ $content['contact_label_subject'] }}</label>
+                            <label for="subject">{{ $content['contact_labels']['subject'] }}</label>
                             <input id="subject" name="subject" type="text" value="{{ old('subject') }}">
                             @error('subject')
                                 <span class="form-error">{{ $message }}</span>
@@ -605,7 +612,7 @@
                         </div>
 
                         <div class="field full">
-                            <label for="message">{{ $content['contact_label_message'] }}</label>
+                            <label for="message">{{ $content['contact_labels']['message'] }}</label>
                             <textarea id="message" name="message" required>{{ old('message') }}</textarea>
                             @error('message')
                                 <span class="form-error">{{ $message }}</span>
@@ -613,7 +620,7 @@
                         </div>
                     </div>
 
-                    <button class="button primary" type="submit">{{ $content['contact_submit_label'] }}</button>
+                    <button class="button primary" type="submit">{{ $content['contact_labels']['submit'] }}</button>
                 </form>
             </div>
         </section>

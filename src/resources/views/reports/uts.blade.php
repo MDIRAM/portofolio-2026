@@ -178,8 +178,8 @@
             </div>
         </section>
 
-        <section class="pdf-shell" aria-label="{{ $content['pdf_shell_aria'] }}">
-            <iframe src="{{ route('reports.uts.pdf') }}" title="{{ $content['iframe_title'] }}"></iframe>
+        <section class="pdf-shell" aria-label="{{ $content['pdf_preview_label'] }}">
+            <iframe src="{{ route('reports.uts.pdf') }}" title="{{ $content['pdf_preview_label'] }}"></iframe>
         </section>
     </main>
 </body>

@@ -6,6 +6,7 @@ use App\Filament\Admin\Resources\SiteContentResource\Pages;
 use App\Models\SiteContent;
 use Filament\Forms;
 use Filament\Forms\Form;
+use Filament\Forms\Get;
 use Filament\Resources\Resource;
 use Filament\Tables;
 use Filament\Tables\Table;
@@ -50,9 +51,11 @@ class SiteContentResource extends Resource
                     ->options([
                         'text' => 'Text',
                         'textarea' => 'Textarea',
+                        'image' => 'Image',
                         'list' => 'List JSON',
                         'json' => 'JSON',
                     ])
+                    ->live()
                     ->default('text')
                     ->required(),
 
@@ -64,6 +67,27 @@ class SiteContentResource extends Resource
                 Forms\Components\Textarea::make('value')
                     ->rows(8)
                     ->helperText('Untuk tipe List JSON atau JSON, isi sebagai JSON valid.')
+                    ->hidden(fn (Get $get): bool => $get('type') === 'image')
+                    ->dehydrated(fn (Get $get): bool => $get('type') !== 'image')
+                    ->columnSpan('full'),
+
+                Forms\Components\TextInput::make('value')
+                    ->label('Path foto profile')
+                    ->helperText('Path ini tersimpan di database. Upload foto baru lewat field di bawah.')
+                    ->visible(fn (Get $get): bool => $get('type') === 'image')
+                    ->dehydrated(fn (Get $get): bool => $get('type') === 'image')
+                    ->columnSpan('full'),
+
+                Forms\Components\FileUpload::make('photo_upload')
+                    ->label('Upload foto profile')
+                    ->disk('public')
+                    ->directory('site-content')
+                    ->image()
+                    ->imageEditor()
+                    ->acceptedFileTypes(['image/jpeg', 'image/png', 'image/webp'])
+                    ->maxSize(2048)
+                    ->helperText('Kosongkan kalau tidak ingin mengganti foto.')
+                    ->visible(fn (Get $get): bool => $get('type') === 'image')
                     ->columnSpan('full'),
 
                 Forms\Components\Toggle::make('is_active')
@@ -81,6 +105,15 @@ class SiteContentResource extends Resource
     {
         return $table
             ->columns([
+                Tables\Columns\TextColumn::make('label')
+                    ->searchable()
+                    ->sortable(),
+
+                Tables\Columns\TextColumn::make('value')
+                    ->limit(80)
+                    ->wrap()
+                    ->searchable(),
+
                 Tables\Columns\TextColumn::make('page')
                     ->searchable()
                     ->sortable(),
@@ -92,9 +125,6 @@ class SiteContentResource extends Resource
                 Tables\Columns\TextColumn::make('key')
                     ->searchable()
                     ->sortable(),
-
-                Tables\Columns\TextColumn::make('label')
-                    ->searchable(),
 
                 Tables\Columns\TextColumn::make('type')
                     ->badge()

@@ -56,6 +56,12 @@ class SiteContent extends Model
 
     public function decodedValue(): mixed
     {
+        if ($this->type === 'image') {
+            $decoded = json_decode($this->value ?: '', true);
+
+            return is_array($decoded) ? ($decoded['path'] ?? '') : $this->value;
+        }
+
         if (in_array($this->type, ['json', 'list'], true)) {
             $decoded = json_decode($this->value ?: '[]', true);
 
@@ -63,5 +69,24 @@ class SiteContent extends Model
         }
 
         return $this->value;
+    }
+
+    public static function mediaUrl(?string $path, string $fallback): string
+    {
+        $path = filled($path) ? $path : $fallback;
+
+        if (str_starts_with($path, 'http://') || str_starts_with($path, 'https://')) {
+            return $path;
+        }
+
+        if (
+            str_starts_with($path, 'coverimg/')
+            || str_starts_with($path, 'files/')
+            || str_starts_with($path, 'storage/')
+        ) {
+            return asset($path);
+        }
+
+        return asset('storage/' . ltrim($path, '/'));
     }
 }

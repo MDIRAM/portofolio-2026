@@ -306,35 +306,35 @@
 
                 <div class="actions">
                     @if ($project->github_url)
-                        <a class="button primary" href="{{ $project->github_url }}" target="_blank" rel="noreferrer">{{ $content['github_button'] }}</a>
+                        <a class="button primary" href="{{ $project->github_url }}" target="_blank" rel="noreferrer">{{ $content['action_buttons']['github'] }}</a>
                     @endif
 
                     @if ($project->live_url)
-                        <a class="button secondary" href="{{ $project->live_url }}" target="_blank" rel="noreferrer">{{ $content['live_button'] }}</a>
+                        <a class="button secondary" href="{{ $project->live_url }}" target="_blank" rel="noreferrer">{{ $content['action_buttons']['live'] }}</a>
                     @endif
 
                     @if ($project->report_file)
-                        <a class="button secondary" href="{{ asset('storage/'.$project->report_file) }}" target="_blank" rel="noreferrer">{{ $content['report_button'] }}</a>
+                        <a class="button secondary" href="{{ asset('storage/'.$project->report_file) }}" target="_blank" rel="noreferrer">{{ $content['action_buttons']['report'] }}</a>
                     @endif
                 </div>
             </div>
 
             <aside class="status-panel panel">
                 <div class="metric">
-                    <span>{{ $content['status_label'] }}</span>
+                    <span>{{ $content['status_labels']['status'] }}</span>
                     <strong>{{ $project->status }}</strong>
                 </div>
 
                 <div class="metric">
-                    <span>{{ $content['percentage_label'] }}</span>
+                    <span>{{ $content['status_labels']['percentage'] }}</span>
                     <strong>{{ $project->progress }}%</strong>
-                    <div class="bar" aria-label="{{ $content['progress_aria_prefix'] }}{{ $project->progress }}{{ $content['progress_aria_suffix'] }}">
+                    <div class="bar" aria-label="{{ $content['status_labels']['progress_aria_prefix'] }}{{ $project->progress }}{{ $content['status_labels']['progress_aria_suffix'] }}">
                         <i style="--progress: {{ $project->progress }}%"></i>
                     </div>
                 </div>
 
                 @if ($project->technologies)
-                    <ul class="stack" aria-label="{{ $content['tech_stack_aria'] }}">
+                    <ul class="stack" aria-label="{{ $content['status_labels']['tech_stack_aria'] }}">
                         @foreach ($project->technologies as $technology)
                             <li>{{ $technology }}</li>
                         @endforeach
@@ -345,12 +345,12 @@
 
         <section class="content">
             <article class="panel">
-                <h2>{{ $content['analysis_heading'] }}</h2>
-                <p>{{ $project->problem_analysis ?: $content['analysis_empty'] }}</p>
+                <h2>{{ $content['content_headings']['analysis'] }}</h2>
+                <p>{{ $project->problem_analysis ?: $content['empty_texts']['analysis'] }}</p>
             </article>
 
             <article class="panel">
-                <h2>{{ $content['requirements_heading'] }}</h2>
+                <h2>{{ $content['content_headings']['requirements'] }}</h2>
                 @if ($project->system_requirements)
                     <ul class="requirement-list">
                         @foreach ($project->system_requirements as $requirement)
@@ -358,22 +358,22 @@
                         @endforeach
                     </ul>
                 @else
-                    <p>{{ $content['requirements_empty'] }}</p>
+                    <p>{{ $content['empty_texts']['requirements'] }}</p>
                 @endif
             </article>
 
             <article class="panel">
-                <h2>{{ $content['architecture_heading'] }}</h2>
-                <p>{{ $project->architecture ?: $content['architecture_empty'] }}</p>
+                <h2>{{ $content['content_headings']['architecture'] }}</h2>
+                <p>{{ $project->architecture ?: $content['empty_texts']['architecture'] }}</p>
             </article>
 
             <article class="panel">
-                <h2>{{ $content['implementation_heading'] }}</h2>
+                <h2>{{ $content['content_headings']['implementation'] }}</h2>
                 <p>{{ $content['implementation_text'] }}</p>
             </article>
 
             <article class="diagram-card">
-                <h2>{{ $content['diagram_heading'] }}</h2>
+                <h2>{{ $content['content_headings']['diagram'] }}</h2>
                 @if ($project->diagram_steps)
                     <ol class="flow">
                         @foreach ($project->diagram_steps as $step)
@@ -381,7 +381,7 @@
                         @endforeach
                     </ol>
                 @else
-                    <p>{{ $content['diagram_empty'] }}</p>
+                    <p>{{ $content['empty_texts']['diagram'] }}</p>
                 @endif
             </article>
         </section>

@@ -95,7 +95,8 @@ Route::post('/contact', function (Request $request) {
     ]);
 
     ContactMessage::create($data);
+    $content = SiteContent::valuesForPage('welcome');
 
     return back()
-        ->with('contact_success', SiteContent::value('welcome', 'contact_success_message'));
+        ->with('contact_success', $content['contact_labels']['success']);
 })->name('contact.store');

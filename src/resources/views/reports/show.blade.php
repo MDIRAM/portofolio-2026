@@ -143,12 +143,12 @@
         </section>
 
         <section>
-            <h2>{{ $content['problem_heading'] }}</h2>
+            <h2>{{ $content['section_headings']['problem'] }}</h2>
             <p>{{ $report->problem_analysis }}</p>
         </section>
 
         <section>
-            <h2>{{ $content['features_heading'] }}</h2>
+            <h2>{{ $content['section_headings']['features'] }}</h2>
             <ul>
                 @foreach ($report->system_features ?? [] as $feature)
                     <li>{{ $feature }}</li>
@@ -157,12 +157,12 @@
         </section>
 
         <section>
-            <h2>{{ $content['architecture_heading'] }}</h2>
+            <h2>{{ $content['section_headings']['architecture'] }}</h2>
             <p>{{ $report->architecture }}</p>
         </section>
 
         <section>
-            <h2>{{ $content['technologies_heading'] }}</h2>
+            <h2>{{ $content['section_headings']['technologies'] }}</h2>
             @foreach ($report->tech_stack ?? [] as $technology)
                 <article class="tech-item">
                     <strong>{{ is_array($technology) ? $technology['name'] : $technology }}</strong>
@@ -174,7 +174,7 @@
         </section>
 
         <section>
-            <h2>{{ $content['diagrams_heading'] }}</h2>
+            <h2>{{ $content['section_headings']['diagrams'] }}</h2>
             @foreach ($report->diagrams ?? [] as $diagram)
                 @php
                     $diagramPath = '/' . implode('/', array_map('rawurlencode', explode('/', ltrim($diagram['image_path'], '/'))));
